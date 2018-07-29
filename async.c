@@ -1,5 +1,6 @@
 #include <uv.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "async.h"
 
 typedef struct
@@ -8,11 +9,13 @@ typedef struct
     lua_State *L;
 } time_handler_data;
 
-void uv_timer_cb_handler(uv_timer_t *hander)
+void uv_timer_cb_handler(uv_timer_t *handler)
 {
-    time_handler_data *handler_data = (time_handler_data *)(hander->data);
+    time_handler_data *handler_data = (time_handler_data *)(handler->data);
     lua_rawgeti(handler_data->L, LUA_REGISTRYINDEX, handler_data->cb_ref);
     lua_pcall(handler_data->L, 0, 0, 0);
+    free(handler->data);
+    free(handler);
 }
 
 static int settimeout(lua_State *L)
@@ -31,8 +34,10 @@ static int settimeout(lua_State *L)
 
 static int cleartimeout(lua_State *L)
 {
-    uv_timer_t *handler = (uv_timer_t *)lua_touserdata(L, 2);
+    uv_timer_t *handler = (uv_timer_t *)lua_touserdata(L, 1);
     uv_timer_stop(handler);
+    free(handler->data);
+    free(handler);
     return 0;
 }
 
