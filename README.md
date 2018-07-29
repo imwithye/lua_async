@@ -7,6 +7,12 @@ async.settimeout(1000, function() print("timeout 1000 --> this shall print secon
 local handler = async.settimeout(3000, function() print("timeout 3000 --> this shall never call") end)
 print("timeout 0    --> this shall print first")
 async.cleartimeout(handler)
+
+handler = async.setinterval(1000, function() print("interval 1000 --> this shall print every second") end)
+async.settimeout(10000, function() 
+    print("after 10s, we clear interval")
+    async.clearinterval(handler)
+end)
 ```
 
 To build and test on MacOS
