@@ -15,7 +15,29 @@ async.settimeout(10000, function()
 end)
 ```
 
-To build and test on MacOS
+Output:
+
+```bash
+➜  async git:(master) make test
+gcc -luv -llua -Wall -fPIC -o2 -o lua_async lua_async.c async.c
+./lua_async example.lua
+timeout 0    --> this shall print first
+interval 1000 --> this shall print every second
+timeout 1000 --> this shall print second
+interval 1000 --> this shall print every second
+timeout 2000 --> this shall print last
+interval 1000 --> this shall print every second
+interval 1000 --> this shall print every second
+interval 1000 --> this shall print every second
+interval 1000 --> this shall print every second
+interval 1000 --> this shall print every second
+interval 1000 --> this shall print every second
+interval 1000 --> this shall print every second
+interval 1000 --> this shall print every second
+after 10s, we clear interval
+```
+
+To build and test on MacOS:
 
 ```bash
 brew install lua
