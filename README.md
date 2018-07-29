@@ -1,4 +1,4 @@
-Asynchronous and event driven in lua
+Asynchronous and event driven programming in lua
 ---
 
 ```lua
