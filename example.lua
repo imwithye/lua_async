@@ -1,0 +1,1 @@
+async.settimeout(1000, function() print("timeout 1000") end)
