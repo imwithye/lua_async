@@ -1,7 +1,9 @@
 #include <uv.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "async.h"
+#include <lua/lua.h>
+#include <lua/lauxlib.h>
+#include <lua/lualib.h>
 
 typedef struct
 {

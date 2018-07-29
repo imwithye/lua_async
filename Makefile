@@ -1,8 +1,8 @@
-async_lua: async_lua.c async.c async.h
-	gcc -luv -llua -Wall -fPIC -o2 -o async_lua async_lua.c async.c
+lua_async: lua_async.c async.c
+	gcc -luv -llua -Wall -fPIC -o2 -o lua_async lua_async.c async.c
 
-test: async_lua
-	./async_lua example.lua
+test: lua_async
+	./lua_async example.lua
 
 clean:
 	git clean -Xdf

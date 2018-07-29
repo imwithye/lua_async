@@ -4,7 +4,7 @@
 #include <uv.h>
 #include <stdio.h>
 
-#include "async.h"
+LUAMOD_API int luaopen_async(lua_State *L);
 
 int main(int argc, const char **argv)
 {
