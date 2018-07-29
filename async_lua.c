@@ -22,6 +22,7 @@ int main(int argc, const char **argv)
     luaL_openlibs(L);
     luaL_requiref(L, "async", luaopen_async, 1);
     int result = luaL_dofile(L, argv[1]);
+    uv_run(uv_default_loop(), UV_RUN_DEFAULT);
     if (result != LUA_OK)
     {
         const char *msg = lua_tostring(L, -1);
